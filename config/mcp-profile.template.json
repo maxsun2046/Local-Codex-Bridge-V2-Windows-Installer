@@ -1,0 +1,21 @@
+{
+  "name": "<PROFILE_NAME>",
+  "mcp": {
+    "commands": [
+      {
+        "name": "local-codex-bridge-v2",
+        "command": "powershell.exe",
+        "args": [
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<BRIDGE_ROOT>\\Launcher.ps1"
+        ],
+        "env": {
+          "LOCAL_CODEX_BRIDGE_CONFIG": "<BRIDGE_ROOT>\\config-local\\bridge.config.local.json"
+        }
+      }
+    ]
+  }
+}

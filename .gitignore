@@ -1,0 +1,16 @@
+.env
+.env.*
+*.local.json
+*.secret.json
+*.key
+*.pem
+*.pfx
+*.cer
+*.log
+*.tmp
+config-local/
+profiles-local/
+secrets/
+node_modules/
+.DS_Store
+Thumbs.db

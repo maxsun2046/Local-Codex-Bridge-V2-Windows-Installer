@@ -1,0 +1,16 @@
+{
+  "profileName": "<PROFILE_NAME>",
+  "tunnelClientPath": "<TUNNEL_CLIENT_PATH>",
+  "mcpEndpoint": "<MCP_ENDPOINT>",
+  "credentialSource": "Set CONTROL_PLANE_API_KEY in your own user context or credential store.",
+  "command": {
+    "program": "powershell.exe",
+    "args": [
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "<BRIDGE_ROOT>\\Launcher.ps1"
+    ]
+  }
+}

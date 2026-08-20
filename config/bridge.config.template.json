@@ -1,0 +1,16 @@
+{
+  "bridgeRoot": "<BRIDGE_ROOT>",
+  "bridgePort": "<BRIDGE_PORT>",
+  "codexPath": "<CODEX_PATH>",
+  "codexAppServerPort": "<CODEX_APP_SERVER_PORT>",
+  "mcpEndpoint": "<MCP_ENDPOINT>",
+  "controlPlaneApiKey": "<CONTROL_PLANE_API_KEY>",
+  "gitBroker": {
+    "enabled": false,
+    "allowlistPath": "<GIT_ALLOWLIST_PATH>"
+  },
+  "notes": [
+    "Copy this file outside the repository before filling real values.",
+    "Do not commit the local copy."
+  ]
+}

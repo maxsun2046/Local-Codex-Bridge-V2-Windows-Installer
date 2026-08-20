@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "repositories": [
+    {
+      "path": "C:\\Tools\\ExampleRepo",
+      "access": "read-only",
+      "reason": "Replace with a repository that exists on this Windows computer."
+    }
+  ],
+  "defaultDeny": true
+}
