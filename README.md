@@ -58,3 +58,65 @@ The scripts do not download, vendor, or redistribute third-party binaries. If a 
 ## Security Boundary
 
 Never commit real secrets. See [SECURITY.md](SECURITY.md) before filling in templates.
+
+<!-- POST_RELEASE_AUDIT_V010 -->
+
+## Project Status and Scope
+
+This is an **unofficial community project**. It is not an OpenAI official
+installer, product, support channel, or distribution of OpenAI software.
+
+The repository provides sanitized documentation, configuration templates,
+validation guidance, and Windows helper scripts for this architecture:
+
+```text
+ChatGPT
+   |
+   v
+Secure MCP Tunnel
+   |
+   v
+Local Codex Bridge
+   |
+   v
+Codex app-server
+```
+
+Optional local Git support adds another layer:
+
+```text
+codex_git -> Git broker -> explicitly allowlisted Git repositories
+```
+
+A healthy Bridge does not require `codex_git`. Core tools such as
+`codex_threads` should work independently of the optional Git broker.
+
+### Before You Start
+
+Install each required binary from its own official, upstream, or otherwise
+authorized distribution source. This repository intentionally does **not**
+redistribute:
+
+- Codex binaries
+- Local Codex Bridge binaries
+- Secure MCP Tunnel binaries
+- private MCP/tunnel profiles
+- API keys or control-plane credentials
+- DPAPI-protected credential blobs
+- cookies or GitHub tokens
+- private Git repository allowlists
+
+For a fresh installation, use this order:
+
+1. [QUICKSTART.md](QUICKSTART.md)
+2. [docs/PLACEHOLDERS.md](docs/PLACEHOLDERS.md)
+3. [docs/INSTALL.md](docs/INSTALL.md)
+4. [docs/MCP-CONFIG.md](docs/MCP-CONFIG.md)
+5. [docs/TUNNEL.md](docs/TUNNEL.md)
+6. [docs/AUTOSTART.md](docs/AUTOSTART.md)
+7. [docs/VALIDATION.md](docs/VALIDATION.md)
+8. [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+
+Do not treat a successful tunnel connection or a running Git broker as proof
+that the Bridge itself is healthy. Validate `/readyz` and then validate the
+actual MCP tools from ChatGPT.

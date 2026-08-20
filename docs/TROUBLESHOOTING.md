@@ -69,3 +69,86 @@ Actions:
 - Use system Git for one-time public documentation maintenance if the current repo should not be allowlisted.
 
 Do not copy another user's allowlist.
+
+<!-- FIELD_FAILURES_V010 -->
+
+## Field-Proven Failure Patterns
+
+### MCP/SSE probe returns HTTP 404
+
+Interpretation:
+
+- network connectivity exists;
+- an HTTP server answered;
+- the requested MCP/SSE route is probably wrong, missing, or mapped to the wrong
+  local component.
+
+### Tunnel is alive but ChatGPT cannot call Bridge tools
+
+Check the layers independently:
+
+1. local Bridge `/readyz`;
+2. tunnel local target;
+3. MCP endpoint/path;
+4. ChatGPT tool discovery;
+5. Codex app-server availability.
+
+### Git broker is alive but Bridge is not
+
+The Git broker and Bridge are separate processes/layers.
+
+Broker health cannot substitute for HTTP 200 from `/readyz` or a successful
+core MCP tool call such as `codex_threads`.
+
+### `wscript.exe` blocked
+
+Managed Windows systems may block Windows Script Host.
+
+Prefer a Task Scheduler action that directly launches PowerShell instead of
+using `.vbs`/`wscript.exe`.
+
+### `detected dubious ownership`
+
+This can happen when files or `.git` were created by a sandbox/service identity
+and later accessed by your normal Windows account.
+
+For a repository you know and trust:
+
+```powershell
+git -c "safe.directory=C:\Path\To\TrustedRepo" status
+```
+
+Avoid blindly adding broad global safe-directory exceptions.
+
+### `gh repo create --source .` says "not a git repository"
+
+GitHub CLI may call Git internally without your temporary `safe.directory`
+setting.
+
+Workaround:
+
+1. create the GitHub repository without `--source`;
+2. add `origin` with your trusted Git invocation;
+3. push explicitly.
+
+### DPAPI credential works interactively but fails after autostart
+
+Likely cause: Windows user-context mismatch.
+
+Credentials encrypted by one user can fail under another user, SYSTEM, a
+sandbox account, or another task identity.
+
+### Health file exists but runtime is unavailable
+
+A health-file path or saved URL is evidence of prior state, not proof of current
+Bridge readiness.
+
+Perform a live request:
+
+```powershell
+Invoke-WebRequest http://127.0.0.1:<BRIDGE_PORT>/readyz
+```
+
+Expected result: HTTP 200.
+
+Then verify an actual MCP tool call from ChatGPT.

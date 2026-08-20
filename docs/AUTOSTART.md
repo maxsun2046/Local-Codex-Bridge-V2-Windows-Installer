@@ -36,3 +36,25 @@ Use the same Windows user that owns any DPAPI-protected credential or user-level
 ```powershell
 .\scripts\Uninstall-LocalCodexBridgeV2.ps1 -TaskName LocalCodexBridgeV2Launcher
 ```
+
+<!-- AUTOSTART_SAFETY_V010 -->
+
+## Windows Autostart Safety
+
+Prefer a direct PowerShell Task Scheduler action over a VBS/`wscript.exe`
+launcher.
+
+Some managed Windows environments block `wscript.exe` by policy even when the
+underlying PowerShell launcher is valid.
+
+Recommended principles:
+
+- trigger at interactive user logon;
+- use the same Windows user context as DPAPI-bound tunnel credentials;
+- use least privilege where possible;
+- avoid duplicate instances;
+- configure restart-on-failure;
+- manually validate the Bridge before enabling autostart.
+
+A scheduled task being marked as started is not equivalent to Bridge readiness.
+Validate `/readyz` separately after logon.

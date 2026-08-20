@@ -34,3 +34,24 @@ $env:LOCAL_CODEX_BRIDGE_CONFIG = "C:\Tools\LocalCodexBridgeV2\config-local\bridg
 - Profile launches a tray helper but not the Bridge process.
 - Profile omits the environment needed to locate the local config.
 - A real endpoint or token was pasted into a tracked template.
+
+<!-- MCP_BOUNDARY_V010 -->
+
+## MCP Boundary Checks
+
+A reachable public tunnel URL is not enough to prove that the MCP route is
+correct.
+
+Validate the layers independently:
+
+```text
+ChatGPT
+  -> tunnel endpoint
+  -> MCP route
+  -> Bridge
+  -> Codex app-server
+```
+
+An HTTP `404` during an MCP/SSE probe usually means the request reached an HTTP
+server but the expected MCP route/path is wrong or is being handled by the wrong
+component. It is different from a connection-refused error.

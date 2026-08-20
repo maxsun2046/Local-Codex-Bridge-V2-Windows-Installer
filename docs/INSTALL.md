@@ -54,3 +54,26 @@ Edit only your local copies. Leave `config/*.template.json` sanitized.
 - Bridge ready endpoint returns 200.
 - ChatGPT can call `codex_threads` through Secure MCP Tunnel.
 - If enabled, ChatGPT can see `codex_git` and read from an allowlisted repository.
+
+<!-- SAFE_UPDATE_V010 -->
+
+## Safe Install and Update Behavior
+
+The public installer helper is intentionally conservative.
+
+When copying sanitized templates into an existing Bridge installation:
+
+1. it never installs Bridge/Tunnel/Codex binaries;
+2. it refuses to treat this public repository itself as the Bridge root;
+3. existing local configuration is backed up before overwrite;
+4. public templates are copied only into `config-local`;
+5. secrets remain the operator's responsibility;
+6. optional validation may run after installation.
+
+A backup directory uses a timestamp similar to:
+
+```text
+<BridgeRoot>\backup\config-local-20260820-163500\
+```
+
+If a new configuration fails, restore the previous files from the latest backup.

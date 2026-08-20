@@ -52,3 +52,38 @@ If `codex_git` is enabled, run a read-only check inside an allowlisted repositor
 6. Run ChatGPT MCP checks.
 
 Passing local health without passing `codex_threads` is not complete validation.
+
+<!-- END_TO_END_VALIDATION_V010 -->
+
+## End-to-End Acceptance Criteria
+
+Do not mark the deployment successful until all applicable layers pass.
+
+### Layer A - Local Bridge
+
+```text
+/readyz -> HTTP 200
+```
+
+### Layer B - ChatGPT MCP
+
+A real call to a core tool such as `codex_threads` must succeed.
+
+### Layer C - Optional Git Broker
+
+If configured, confirm that `codex_git` is exposed and that a read-only
+operation works only inside an explicitly allowlisted repository.
+
+### Layer D - Reboot/Logon
+
+If autostart is enabled:
+
+1. reboot or sign out/in;
+2. verify Bridge `/readyz`;
+3. verify tunnel state;
+4. verify ChatGPT MCP;
+5. verify optional `codex_git`.
+
+Do not accept Task Scheduler status, tunnel process existence, Git broker process
+existence, a health URL file, or an open TCP port as end-to-end proof by
+themselves.
