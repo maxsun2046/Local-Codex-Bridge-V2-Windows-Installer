@@ -61,6 +61,27 @@ Never commit real secrets. See [SECURITY.md](SECURITY.md) before filling in temp
 
 <!-- POST_RELEASE_AUDIT_V010 -->
 
+## Validated Baseline
+
+Supported/validated baseline: **Local Codex Bridge v2.1.2** custom V2 architecture
+(Bridge + optional Git broker + Secure MCP Tunnel + Codex app-server).
+
+Expected tool surface (exactly 8):
+
+```text
+codex_threads
+codex_turn
+codex_observe
+codex_steer
+codex_respond
+codex_interrupt
+codex_checkpoint
+codex_git
+```
+
+This is an **unofficial community project**; it is not an OpenAI official
+installer, product, support channel, or distribution of OpenAI software.
+
 ## Project Status and Scope
 
 This is an **unofficial community project**. It is not an OpenAI official

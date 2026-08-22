@@ -1,4 +1,4 @@
-# Git Broker
+﻿# Git Broker
 
 `codex_git` is optional. It should be exposed only when you want ChatGPT/Codex to perform Git operations through an allowlist.
 
@@ -66,3 +66,17 @@ per-command `safe.directory`, causing GitHub CLI to report that the current
 directory is not a Git repository. In that case, create the remote repository
 without `--source`, add `origin` using the trusted Git command, and push
 explicitly.
+
+## Broker Credential Lifecycle (Security Notes)
+
+- The broker requires a provisioned credential (`state\token.txt`) before it can
+  start. It does not self-generate one.
+- Provision the credential on the target machine itself (for example via the
+  broker controller `start` action), then stop it cleanly. Do **not** copy a
+  credential from another installation or machine.
+- When a Scheduled Task starts the broker directly, it depends on a valid
+  existing credential state. Upgrade/promotion flows must not delete the
+  credential that is still in use.
+- Wrapper scripts should resolve paths at runtime (for example `$PSScriptRoot`
+  plus `Join-Path`) instead of hardcoding a specific installation directory, so
+  the same wrapper works across staging, production, and rollback directories.
